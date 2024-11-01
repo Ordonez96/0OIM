@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalle de Proyecto</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <script>
+        function calcularGasto(vehiculoId) {
+            const kmPorGalon = parseFloat(document.getElementById('km_por_galon_' + vehiculoId).innerText);
+            const kilometrosUsados = parseFloat(document.getElementById('kilometros_' + vehiculoId).value) || 0;
+            const precioCombustible = parseFloat(document.getElementById('precio_combustible_' + vehiculoId).value) || 0;
+
+            let gastoTotal = 0;
+
+            if (kmPorGalon > 0) {
+                const galonesUsados = kilometrosUsados / kmPorGalon;
+                gastoTotal = galonesUsados * precioCombustible;
+            }
+
+            document.getElementById('gasto_total_' + vehiculoId).innerText = 'Gasto Total: $' + gastoTotal.toFixed(2);
+            calcularTotalGasto(); // Actualiza el total cada vez que se calcula el gasto de un vehículo
+        }
+
+        function calcularTotalGasto() {
+            const vehiculos = document.querySelectorAll('.vehiculo');
+            let totalGasto = 0;
+
+            vehiculos.forEach(vehiculo => {
+                const gastoTexto = vehiculo.querySelector('.gasto_total').innerText;
+                const gasto = parseFloat(gastoTexto.replace('Gasto Total: $', ''));
+                totalGasto += isNaN(gasto) ? 0 : gasto;
+            });
+
+            document.getElementById('total_gasto').innerText = 'Total Gasto: $' + totalGasto.toFixed(2);
+        }
+
+        function guardarGastos() {
+            document.getElementById('formGastos').submit(); // Enviar el formulario para guardar gastos
+        }
+    </script>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="{% url 'principal' %}" class="navbar-logo">OIM-Page</a>
+            <ul class="navbar-menu">
+                <li><a href="{% url 'principal' %}">Inicio</a></li>
+                <li><a href="">Contacto</a></li>
+                <li><a href="">Sobre Nosotros</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <h1>{{ proyecto.nombre }}</h1>
+    <p>{{ proyecto.descripcion }}</p>
+
+    <form method="post" id="formGastos">
+        {% csrf_token %}
+        <section class="vehiculos">
+            {% for vehiculo in vehiculos %}
+                <section class="vehiculo">
+                    <section class="img-section">  
+                        <img src="{{ vehiculo.imagen.url }}" alt="{{ vehiculo.nombre }}">
+                        <h3>{{ vehiculo.nombre }}</h3>
+                        <p>Km por galón: <span id="km_por_galon_{{ vehiculo.id }}">{{ vehiculo.km_por_galon }}</span></p>
+                        <p>Kilómetros usados: <input type="number" id="kilometros_{{ vehiculo.id }}" min="0" value="0" onchange="calcularGasto({{ vehiculo.id }})"></p>
+                        <p>Precio combustible: <input type="number" id="precio_combustible_{{ vehiculo.id }}" min="0" value="0" onchange="calcularGasto({{ vehiculo.id }})"></p>
+                        <button type="button" onclick="calcularGasto({{ vehiculo.id }})">Añadir Kilómetros</button>
+                        <p id="gasto_total_{{ vehiculo.id }}" class="gasto_total">Gasto Total: $0.00</p>
+                    </section>
+                </section>
+            {% endfor %}
+        </section>
+        
+        <hr>
+        <section class="centrado">
+            <h4 id="total_gasto">Total Gasto: $0.00</h4>
+            <button type="button" onclick="guardarGastos()">Guardar Gastos</button>
+        </section>
+    </form>
+</body>
+</html>

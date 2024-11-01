@@ -1,0 +1,109 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #2c2c2c; /* Fondo oscuro */
+    color: #eaeaea; /* Texto claro */
+}
+
+/* Contenedores de proyectos y vehículos */
+.proyectos, .vehiculos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+/* Estilos de las tarjetas de proyecto y vehículo */
+.proyecto, .vehiculo {
+    border: 1px solid #444; /* Borde gris oscuro */
+    border-radius: 8px; /* Bordes redondeados */
+    padding: 15px;
+    background-color: #3c3c3c; /* Fondo de tarjeta oscuro */
+    flex: 1 1 calc(33.333% - 20px);
+    box-sizing: border-box;
+    text-align: center;
+    transition: transform 0.2s; /* Animación al pasar el mouse */
+}
+
+/* Efecto al pasar el mouse sobre las tarjetas */
+.proyecto:hover, .vehiculo:hover {
+    transform: scale(1.05); /* Ampliar ligeramente */
+}
+
+/* Estilos de las imágenes de vehículos */
+.vehiculo img {
+    width: 100%; /* Ancho completo del contenedor */
+    height: 500px; /* Altura aumentada para mayor visibilidad */
+    object-fit: cover; /* Mantiene la proporción de la imagen */
+    border-radius: 4px; /* Bordes ligeramente redondeados */
+}
+
+/* Estilo adicional para centrar elementos */
+.centrado {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Espacio en la parte inferior de la lista de vehículos */
+.vehiculos {
+    margin-bottom: 30px;
+}
+
+
+/* Estilos para la barra de navegación */
+.navbar {
+    background-color: #1a1a1a; /* Fondo oscuro */
+    padding: 10px 20px; /* Espaciado interno */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra */
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between; /* Espacio entre elementos */
+    align-items: center; /* Alinea verticalmente los elementos */
+}
+
+.navbar-logo {
+    font-size: 24px; /* Tamaño del texto del logo */
+    color: #eaeaea; /* Color claro para el texto */
+    text-decoration: none; /* Sin subrayado */
+}
+
+.navbar-menu {
+    list-style: none; /* Sin viñetas */
+    display: flex; /* Elementos en fila */
+    gap: 15px; /* Espacio entre los enlaces */
+}
+
+.navbar-menu li {
+    margin: 0; /* Sin margen */
+}
+
+.navbar-menu a {
+    color: #eaeaea; /* Color de los enlaces */
+    text-decoration: none; /* Sin subrayado */
+    padding: 5px 10px; /* Espaciado interno */
+    transition: background-color 0.3s; /* Transición suave */
+}
+
+.navbar-menu a:hover {
+    background-color: #3c3c3c; /* Color de fondo al pasar el mouse */
+    border-radius: 5px; /* Bordes redondeados */
+}
+
+p {
+    text-align: justify;
+}
+
+/* Media queries para responsividad */
+@media (max-width: 768px) {
+    .proyecto, .vehiculo {
+        flex: 1 1 calc(50% - 20px);
+    }
+}
+
+@media (max-width: 480px) {
+    .proyecto, .vehiculo {
+        flex: 1 1 100%;
+    }
+}

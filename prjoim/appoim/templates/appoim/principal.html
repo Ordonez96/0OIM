@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>OIM-Page</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="{% url 'principal' %}" class="navbar-logo">OIM-Page</a>
+            <ul class="navbar-menu">
+                <li><a href="{% url 'principal' %}">Inicio</a></li>
+                <li><a href="https://www.iom.int/es/centros-administrativos" target="_blank">Contacto</a></li>
+                <li><a href="https://www.iom.int/es/quienes-somos" target="_blank">Sobre Nosotros</a></li>
+
+            </ul>
+        </div>
+    </nav>
+
+    <h1>Lista de Proyectos</h1>
+    <div class="proyectos">
+        {% for proyecto in proyectos %}
+            <div class="proyecto">
+                <h2>{{ proyecto.nombre }}</h2>
+                <p>{{ proyecto.descripcion_corta }}</p>
+                <a href="{% url 'detalle_proyecto' proyecto.id %}">Ver Detalles</a>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
