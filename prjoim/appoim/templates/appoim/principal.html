@@ -23,11 +23,12 @@
     <h1>Lista de Proyectos</h1>
     <div class="proyectos">
         {% for proyecto in proyectos %}
-            <div class="proyecto">
+            <section class="proyecto">
                 <h2>{{ proyecto.nombre }}</h2>
                 <p>{{ proyecto.descripcion_corta }}</p>
+                <img src="{{ proyecto.img.url }}" alt="{{ proyecto.nombre }}">
                 <a href="{% url 'detalle_proyecto' proyecto.id %}">Ver Detalles</a>
-            </div>
+            </section>
         {% endfor %}
     </div>
 </body>

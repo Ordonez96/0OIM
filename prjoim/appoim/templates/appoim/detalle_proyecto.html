@@ -47,14 +47,16 @@
             <a href="{% url 'principal' %}" class="navbar-logo">OIM-Page</a>
             <ul class="navbar-menu">
                 <li><a href="{% url 'principal' %}">Inicio</a></li>
-                <li><a href="">Contacto</a></li>
-                <li><a href="">Sobre Nosotros</a></li>
+                <li><a href="https://www.iom.int/es/centros-administrativos" target="_blank">Contacto</a></li>
+                <li><a href="https://www.iom.int/es/quienes-somos" target="_blank">Sobre Nosotros</a></li>
+
             </ul>
         </div>
     </nav>
 
     <h1>{{ proyecto.nombre }}</h1>
     <p>{{ proyecto.descripcion }}</p>
+    <h1>Vehiculos Asociados</h1>
 
     <form method="post" id="formGastos">
         {% csrf_token %}
